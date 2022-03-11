@@ -3,6 +3,7 @@ package com.example.demo;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -32,15 +33,9 @@ public class DemoController {
             String value = request.getParameter(key);
             map.put("parameter: " + key, value);
         }
-        Cookie[] cookies = request.getCookies();
+        Cookie[] cookies = Objects.requireNonNullElse(request.getCookies(), new Cookie[] {});
         for (Cookie cookie : cookies) {
             map.put("cookie: " + cookie.getName(), cookie.getValue());
-
-        }
-        while (parameterNames.hasMoreElements()) {
-            String key = parameterNames.nextElement();
-            String value = request.getParameter(key);
-            map.put("parameter: " + key, value);
         }
         map.put("getRemoteUser", request.getRemoteUser());
         map.put("getQueryString", request.getQueryString());
