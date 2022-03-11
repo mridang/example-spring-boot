@@ -33,7 +33,7 @@ public class DemoController {
             String value = request.getParameter(key);
             map.put("parameter: " + key, value);
         }
-        Cookie[] cookies = Objects.requireNonNullElse(request.getCookies(), new Cookie[] {});
+        Cookie[] cookies = Objects.requireNonNullElse(request.getCookies(), new Cookie[]{});
         for (Cookie cookie : cookies) {
             map.put("cookie: " + cookie.getName(), cookie.getValue());
         }
