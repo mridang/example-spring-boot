@@ -1,9 +1,5 @@
 # AWS Copilot Sample Service
-このリポジトリは、クラスメソッド株式会社が主催するAWSのオンライン勉強会 AKIBA.AWS #2 ONLINE で発表された「今すぐコンテナを使い始めたい人のためのAmazon ECSとAWS Copilot」に向けたサンプルサービスです。
-
 This repository contains the sample services of "Introduction to Amazon ECS and AWS Copilot for Container Beginners" on AKIBA.AWS ONLINE #2.
-
-- [【4/21（水）リモート開催】AKIBA\.AWS ONLINE \#02 \-このサービスの話がしたい！ IoT Events / Copilot / S3 編\- \#AKIBAAWS \| DevelopersIO](https://dev.classmethod.jp/news/akiba-aws-210421/)
 
 ## Directory Structure
 ```bash
@@ -19,23 +15,6 @@ This repository contains the sample services of "Introduction to Amazon ECS and 
         └── app.conf
 ```
 
-## Service Structure
-![Service Structure Image](img/service_structure.png)
-
-### Nginx: Copilot Load Balanced Web Service
-```bash
-$ cat nginx/conf.d/app.conf
-server {
-  location /actuator/health {
-    proxy_pass http://backend.sample-app.local:80;
-  }
-  
-  location / {
-    return 200 "OK";
-    add_header Content-Type text/plain;
-  }
-}
-```
 
 ### Spring Boot Application: Copilot Backend Service
 ```bash
@@ -48,6 +27,7 @@ $ curl http://localhost:80/actuator/health
 ```
 
 ## How to use
+
 ### References
 - https://github.com/aws/copilot-cli
 - https://aws.github.io/copilot-cli/
