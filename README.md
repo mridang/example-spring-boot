@@ -1,72 +1,62 @@
 # AWS Copilot Sample Service
-This repository contains the sample services of "Introduction to Amazon ECS and AWS Copilot for Container Beginners" on AKIBA.AWS ONLINE #2.
 
-## Directory Structure
-```bash
-.
-├── README.md
-├── app
-│   ├── Dockerfile
-│   └── ......
-│   └── ......
-└── nginx
-    ├── Dockerfile
-    └── conf.d
-        └── app.conf
+This repository contains a sample Spring Boot application that is deployed on to ECS via AWS Copilot.
+
+The application mode is a "Load Balanced Web Service" and was chosen based on the recommedations in this guide. https://aws.github.io/copilot-cli/docs/concepts/services/
+
+## Developing
+
+**Install the Copilot CLI**
+
+You'll need to have the AWS Copilot CLI installed prior to proceeding. https://aws.github.io/copilot-cli/docs/overview/
+
+The guide will explain how you should install the CLI. For OSX, it is a simple `brew install aws/tap/copilot-cli`.
+
+## Building
+
+You also need JDK11 installed and `JAVA_HOME` pointing to JDK11.
+
+Running the following should run both the tests and also generate all the build artifacts.
+
+```shell
+./gradlew clean build
 ```
 
+## Testing
 
-### Spring Boot Application: Copilot Backend Service
+The project uses the Spring Boot plugin for Gradle. In order to run the application locally, you can use:
+
 ```bash
-$ cd app/
-$ ./gradlew build
-$ docker build -t aws-copilot-sample-service/app .
-$ docker run -d -p 80:80 aws-copilot-sample-service/app
-$ curl http://localhost:80/actuator/health
+./gradlew bootRun
+```
+
+### Checking the Docker container
+
+```bash
+./gradlew build
+docker build -t aws-copilot-sample-service/app .
+docker run -d -p 80:80 aws-copilot-sample-service/app
+curl http://localhost:80/actuator/health
 {"status":"UP"}
 ```
 
-## How to use
+## Deploying
 
-### References
-- https://github.com/aws/copilot-cli
-- https://aws.github.io/copilot-cli/
-- https://aws.github.io/copilot-cli/community/guides/
+Deploying the service is a quick one liner. Deployments are rolling and therefore do take a few minutes.
 
-### Install Copilot
 ```bash
-$ brew install aws/tap/copilot-cli
+copilot svc deploy --name backend --app searchy --env staging
 ```
 
-### Initialize and Deploy Backend Service
+⚠️ The Copilot CLI can be iffy at times and deployments do get stuck. If this happens, simply cancel the deploy and rerun the deploy with the `--force` flag.
+
+##### Example
+
 ```bash
-$ copilot init
-Application name: sample-app
-Workload type: Backend Service
-Service name: backend
-Dockerfile: app/Dockerfile
-no EXPOSE statements in Dockerfile app/Dockerfile
-
-$ tree copilot
-copilot
-└── backend
-    └── manifest.yml
-
-$ copilot env init --name staging
-Which credentials would you like to use to create staging? [profile default]
-Would you like to use the default configuration for a new environment?
-    - A new VPC with 2 AZs, 2 public subnets and 2 private subnets
-    - A new ECS Cluster
-    - New IAM Roles to manage services and jobs in your environment
- Yes, use default.
-✔ Linked account 123456789012 and region ap-northeast-1 to application sample-app.
-✔ Proposing infrastructure changes for the sample-app-staging environment.
-✔ Created environment staging in region ap-northeast-1 under application sample-app.
-
-$ copilot svc deploy --name backend --env staging
+$ copilot svc deploy --name backend --app searchy --env staging
 [+] Building 3.5s (8/8) FINISHED
 Login Succeeded
-The push refers to repository [123456789012.dkr.ecr.ap-northeast-1.amazonaws.com/sample-app/backend]
+The push refers to repository [123456789012.dkr.ecr.ap-northeast-1.amazonaws.com/searchy/backend]
 ✔ Proposing infrastructure changes for stack sample-app-staging-backend
 - Creating the infrastructure for stack sample-app-staging-backend
   - Service discovery for your services to communicate within the VPC
@@ -79,76 +69,104 @@ The push refers to repository [123456789012.dkr.ecr.ap-northeast-1.amazonaws.com
 ✔ Deployed backend.
 ```
 
-### Update Backend Service Manifest File and Deploy Again
-```bash
-$ vi copilot/backend/manifest.yml
+### Creating another environment
 
-name: backend
-type: Backend Service
+When deploying this to a new account, you must create an environment. Begin 
+by listing all existing environments using the `copilt env ls` command.
 
-image:
-  build: app/Dockerfile
-  port: 80 # add container port number to enable service discovery
-
-cpu: 256
-memory: 512
-count: 1 
-exec: true
- 
-network:
-  vpc:
-    placement: 'private' # add network config to create NAT Gateway and deploy Backend Service in private subnet groups  
-
-$ copilot svc deploy --name backend --app sample-app --env staging
-
-- Updating the infrastructure for stack sample-app-staging-backend
-  - Update your environment's shared resources
-    - NAT Gateway 2 enabling workloads placed in private subnet 2 to reach the internet
-    - NAT Gateway 1 enabling workloads placed in private subnet 1 to reach the internet
-
-✔ Deployed backend, its service discovery endpoint is backend.sample-app.local:80.
-```
-
-### Deploy Load Balanced Web Services
-```bash
-$ copilot svc init --name web --app sample-app
-Workload type: Load Balanced Web Service
-Dockerfile: nginx/Dockerfile
-no EXPOSE statements in Dockerfile nginx/Dockerfile
-Port: 80
-
-$ tree copilot
-copilot
-└── backend
-    └── manifest.yml
-└── web
-    └── manifest.yml
-
-$ copilot svc deploy --name web --app sample-app --env staging
-
-✔ Deployed web, you can access it at http://sampl-Publi-0ABCDEFGHIJKL-1234567890.ap-northeast-1.elb.amazonaws.com.
-
-$ curl http://sampl-Publi-0ABCDEFGHIJKL-1234567890.ap-northeast-1.elb.amazonaws.com
-OK
-
-$ curl http://sampl-Publi-0ABCDEFGHIJKL-1234567890.ap-northeast-1.elb.amazonaws.com/actuator/health
-{"status":"UP"}
-```
-
-### Create Other Environment
-```bash
-$ copilot env init --name production --app sample-app
+##### Example
+```shell
 $ copilot env ls
-staging
 production
-
-$ copilot svc deploy --name backend --app sample-app --env production
-$ copilot svc deploy --name web --app sample-app --env production
 ```
 
-### Get CloudFormation Templates
-If you want to get the CloudFormation templates that AWS Copilot generate, execute `copilot svc package` command.
+In this case there are already one existing environment. In the event 
+that you need to create a new one called stating, you can do so
+using the `copilot env init --name staging` command.
+
 ```bash
-copilot svc package --name backend --app sample-app --env staging --output-dir ./infrastructure
-copilot svc package --name web --app sample-app --env staging --output-dir ./infrastructure
+$ copilot env init --name staging
+Which credentials would you like to use to create staging? [profile default]
+Would you like to use the default configuration for a new environment?
+    - A new VPC with 2 AZs, 2 public subnets and 2 private subnets
+    - A new ECS Cluster
+    - New IAM Roles to manage services and jobs in your environment
+ Yes, use default.
+✔ Linked account 123456789012 and region ap-northeast-1 to application sample-app.
+✔ Proposing infrastructure changes for the sample-app-staging environment.
+✔ Created environment staging in region ap-northeast-1 under application sample-app.
 ```
+
+### Updating deployment configuration
+
+The configuration for the environment is stored in the `copilot/search/manifest.yml` file.
+
+This file contains all the necessary information for the deployed service.
+
+##### Example
+
+```yaml
+# The manifest for the "searchy" service.
+# Read the full specification for the "Load Balanced Web Service" type at:
+#  https://aws.github.io/copilot-cli/docs/manifest/lb-web-service/
+
+# Your service name will be used in naming your resources like log groups, ECS services, etc.
+name: searchy
+type: Load Balanced Web Service
+
+# Distribute traffic to your service.
+http:
+  # Requests to this path will be forwarded to your service.
+  # To match all requests you can use the "/" path.
+  path: '/'
+  healthcheck: '/actuator/health'
+
+# Configuration for your containers and service.
+image:
+  # Docker build arguments. For additional overrides:
+  #https://aws.github.io/copilot-cli/docs/manifest/lb-web-service/#image-build
+  build: Dockerfile
+  # Port exposed through your container to route traffic to it.
+  port: 80
+
+cpu: 256       # Number of CPU units for the task.
+memory: 512    # Amount of memory in MiB used by the task.
+count: 1       # Number of tasks that should be running in your service.
+exec: true     # Enable running commands in your container.
+
+# Optional fields for more advanced use-cases.
+#
+#variables:                    # Pass environment variables as key value pairs.
+#  LOG_LEVEL: info
+
+#secrets:                      # Pass secrets from AWS Systems Manager (SSM) Parameter Store.
+#  GITHUB_TOKEN: GITHUB_TOKEN
+
+# You can override any of the values defined above by environment.
+#environments:
+#  test:
+#    count: 2               # Number of tasks to run for the "test" environment.
+
+```
+
+### Dumping CloudFormation Templates
+
+If you want to get the CloudFormation templates that AWS Copilot generate, execute `copilot svc package` command.
+
+```bash
+copilot svc package --name backend --app searchy --env staging --output-dir ./infrastructure
+copilot svc package --name web --app searchy --env staging --output-dir ./infrastructure
+```
+
+## References
+- https://github.com/aws/copilot-cli
+- https://aws.github.io/copilot-cli/
+- https://aws.github.io/copilot-cli/community/guides/
+
+## Authors
+
+* Mridang Agarwalla <mridang@nosto.com>
+
+## License
+
+Apache 2.0
