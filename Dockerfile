@@ -1,4 +1,4 @@
-FROM amazoncorretto:11-alpine
+FROM amazoncorretto:11.0.14
 VOLUME /tmp
 COPY build/libs/*.jar app.jar
 
