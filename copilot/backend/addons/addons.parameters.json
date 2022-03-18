@@ -1,12 +1,8 @@
 {
 	"Parameters" : {
-		"Name": "CloudFront",
-		"AppName": "searchy",
-		"EnvName": "staging",
-		"OriginALBTGPort": 80
 	},
 	"Tags": {
-		"copilot-application": "sample-app",
+		"copilot-application": "searchy",
 		"copilot-environment": "staging",
 		"copilot-service": "backend"
 	}
