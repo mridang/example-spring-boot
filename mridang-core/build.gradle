@@ -52,8 +52,6 @@ dependencies {
     api group: 'com.fasterxml.jackson.module', name: 'jackson-modules-java8', version: '2.13.3'
     api group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310'
     api group: 'io.micrometer', name: 'micrometer-core', version: '1.9.0'
-    api group: 'com.nosto.beanie', name: 'beanie-annotations', version: '3.1.0'
-    testFixturesApi group: 'com.nosto.beanie', name: 'junit-jupiter', version: '3.1.2'
     implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.17.2'
     implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.17.2'
 }
