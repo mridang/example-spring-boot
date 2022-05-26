@@ -1,0 +1,11 @@
+server:
+  error:
+    include-message: always
+    include-stacktrace: always
+    include-exception: true
+  ssl:
+    enabled: false
+spring:
+  config:
+    activate:
+      on-profile: dev

@@ -1,0 +1,29 @@
+server:
+  ssl:
+    enabled: false
+management:
+  metrics:
+    export:
+      newrelic:
+        enabled: false
+        api-key: 00000000000000000000000000000000
+        account-id: 154964
+        step: 10s
+  endpoints:
+    web:
+      exposure:
+        include: health
+    enabled-by-default: false
+spring:
+  config:
+    activate:
+      on-profile: staging
+logging:
+  config: classpath:logging/staging_log4j2.xml
+  level:
+    root: ERROR
+
+
+###############################################################################
+
+

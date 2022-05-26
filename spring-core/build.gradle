@@ -1,0 +1,58 @@
+plugins {
+    id 'myproject.java-conventions'
+    id 'myproject.spring-conventions'
+}
+
+
+repositories {
+    maven {
+        url "https://repo.spring.io/milestone"
+    }
+    mavenCentral()
+}
+
+dependencies {
+    api group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.7.0'
+    api group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.7.0'
+    api group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.7.0'
+    api group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.7.0'
+    api group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '2.7.0'
+    api group: 'org.springframework.boot', name: 'spring-boot-starter-data-rest', version: '2.7.0'
+    api group: 'org.springframework.boot', name: 'spring-boot-starter-oauth2-client', version: '2.7.0'
+    api group: 'org.springframework.boot', name: 'spring-boot-starter-oauth2-resource-server', version: '2.7.0'
+    api group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.7.0'
+    api group: 'org.springframework.boot', name: 'spring-boot-starter-log4j2', version: '2.7.0'
+    api group: 'org.springframework.boot', name: 'spring-boot-starter-graphql', version: '2.7.0'
+    testFixturesApi group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.7.0'
+    api group: 'org.springframework.graphql', name: 'spring-graphql', version: '1.0.0-M6'
+    testFixturesApi group: 'org.springframework.graphql', name: 'spring-graphql-test', version: '1.0.0-M6'
+    api group: 'org.springframework.data', name: 'spring-data-rest-hal-explorer', version: '3.7.0'
+    api(group: 'net.saliman', name: 'spring-boot-starter-request-correlation', version: '2.0.0') {
+        transitive = false
+    }
+    api group: 'org.zalando', name: 'problem-spring-web', version: '0.27.0'
+    api group: 'javax.inject', name: 'javax.inject', version: '1'
+    api group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+    modules {
+        module("org.springframework.boot:spring-boot-starter-logging") {
+            replacedBy("org.springframework.boot:spring-boot-starter-log4j2", "Use Log4j2 instead of Logback")
+        }
+    }
+    constraints {
+        implementation(group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.2.2') {
+            because 'previous versions have a bug impacting this application'
+        }
+    }
+    api group: 'com.github.britter', name: 'bean-validators', version: '0.8.0'
+    implementation group: 'commons-codec', name: 'commons-codec', version: '1.15'
+    implementation group: 'one.util', name: 'streamex', version: '0.8.1'
+    api group: 'com.graphql-java', name: 'graphql-java-extended-scalars', version: '18.1'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+springBoot {
+    mainClass = 'com.mridang.Application'
+}

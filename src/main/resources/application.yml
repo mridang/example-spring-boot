@@ -1,0 +1,44 @@
+server:
+  port: 9000
+  http2:
+    enabled: true
+  ssl:
+    key-store: config/certs/keystore.p12
+    key-store-password: p@ssw0rd
+    key-store-type: pkcs12
+    key-alias: spring
+  error:
+    include-message: never
+    include-stacktrace: never
+    include-exception: false
+
+logging:
+  config: classpath:logging/log4j2.xml
+  level:
+    root: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+    enabled-by-default: true
+
+spring:
+  security:
+    user:
+      name: admin
+      password: TWr/}}H3#"2^N<C'
+  output:
+    ansi:
+      enabled: always
+  main:
+    allow-bean-definition-overriding: true
+  graphql:
+    schema:
+      printer:
+        enabled: false
+    graphiql:
+      enabled: false
+
+###############################################################################

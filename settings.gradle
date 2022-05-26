@@ -1,1 +1,3 @@
-rootProject.name = 'searchy'
+rootProject.name = 'springy'
+include 'spring-core'
+include 'mridang-core'

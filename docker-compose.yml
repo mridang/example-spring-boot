@@ -1,0 +1,14 @@
+version: '3.6'
+services:
+  springy:
+    build:
+      context: .
+    ports:
+      - "9000"
+      - "7091"
+    environment:
+      - LAUNCH_TYPE=local
+      - AWS_PROFILE=default
+    volumes:
+      - ~/.aws:${HOME}/.aws
+    entrypoint: ./init-and-run.sh local dev

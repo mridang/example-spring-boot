@@ -1,0 +1,25 @@
+server:
+  ssl:
+    enabled: false
+management:
+  metrics:
+    export:
+      newrelic:
+        enabled: false
+        api-key: 00000000000000000000000000000000
+        account-id: 154964
+        step: 10s
+  endpoints:
+    web:
+      exposure:
+        include: health
+    enabled-by-default: false
+spring:
+  config:
+    activate:
+      on-profile: prod
+logging:
+  config: classpath:logging/prod_log4j2.xml
+  level:
+    root: ERROR
+###############################################################################

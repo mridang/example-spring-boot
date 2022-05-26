@@ -1,4 +1,15 @@
 #!/usr/bin/env sh
+# shellcheck disable=SC2006
+# shellcheck disable=SC2039
+# shellcheck disable=SC2154
+# shellcheck disable=SC2166
+# shellcheck disable=SC2046
+# shellcheck disable=SC2164
+# shellcheck disable=SC2116
+# shellcheck disable=SC2196
+# shellcheck disable=SC2086
+# shellcheck disable=SC2181
+# shellcheck disable=SC2003
 
 #
 # Copyright 2015 the original author or authors.
