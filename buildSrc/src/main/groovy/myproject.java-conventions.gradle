@@ -24,7 +24,7 @@ repositories {
         url "https://maven.onehippo.com/maven2/"
     }
     maven {
-        name = "mridang"
+        name = "github"
         url = uri("https://maven.pkg.github.com/nosto/beanie")
         credentials {
             username = project.findProperty("githubUsername") ?: System.getenv("GITHUB_ACTOR")
