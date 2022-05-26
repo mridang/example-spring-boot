@@ -16,6 +16,6 @@ COPY --from=builder /tmp/springy/build/install/springy .
 #RUN chown -R java:java /srv/springy
 #USER java
 
-HEALTHCHECK --start-period=30s --interval=30s --timeout=3s --retries=3 CMD curl --fail http://localhost:9000/actuator/health || exit 1
-EXPOSE 9000 7091
+HEALTHCHECK --start-period=30s --interval=30s --timeout=3s --retries=3 CMD curl --fail http://localhost:9999/actuator/health || exit 1
+EXPOSE 9999 7091
 ENTRYPOINT ["./init-and-run.sh"]

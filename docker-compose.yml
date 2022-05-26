@@ -4,7 +4,7 @@ services:
     build:
       context: .
     ports:
-      - "9000"
+      - "9999"
       - "7091"
     environment:
       - LAUNCH_TYPE=local
