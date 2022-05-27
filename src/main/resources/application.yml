@@ -4,7 +4,7 @@ server:
     enabled: true
   ssl:
     key-store: config/certs/keystore.p12
-    key-store-password: p@ssw0rd
+    key-store-password: nosto
     key-store-type: pkcs12
     key-alias: spring
   error:
