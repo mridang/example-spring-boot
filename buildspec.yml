@@ -3,6 +3,7 @@ phases:
   pre_build:
     commands:
       - $(aws ecr get-login --no-include-email)
+      - aws ecr get-login-password | docker login --username AWS --password-stdin 489478819445.dkr.ecr.us-east-1.amazonaws.com
       - TAG="$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | head -c 8)"
       - IMAGE_URI="188628773952.dkr.ecr.us-east-1.amazonaws.com/searchy/app:${TAG}"
       - export

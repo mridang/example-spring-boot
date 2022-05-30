@@ -17,7 +17,7 @@ jobs:
       - name: Setup and execute Gradle 'test' task
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: test
+          arguments: test -PgithubUsername=mridang -PgithubPassword=${{ secrets.GITHUBPASSWORD }} -PmavenUser=deploymentRead -PmavenPassword=${{ secrets.MAVENPASSSWORD }}
 
       - name: Archive build output
         uses: actions/upload-artifact@v2

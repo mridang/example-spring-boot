@@ -21,6 +21,9 @@ else
   export LOCAL_IP=$(hostname --ip-address)
 fi
 
+export RUN_OPTS="${RUN_OPTS} -XX:+PrintFlagsFinal"
+export RUN_OPTS="${RUN_OPTS} -XX:+UseContainerSupport"
+export RUN_OPTS="${RUN_OPTS} -XX:MaxRAMPercentage=80.0"
 export RUN_OPTS="${RUN_OPTS} -XX:+PreserveFramePointer"
 export RUN_OPTS="${RUN_OPTS} -XX:+ExitOnOutOfMemoryError"
 export RUN_OPTS="${RUN_OPTS} -XX:-OmitStackTraceInFastThrow"
