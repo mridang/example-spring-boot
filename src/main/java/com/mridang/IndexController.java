@@ -1,6 +1,7 @@
 package com.mridang;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +15,8 @@ public class IndexController {
 
     @GetMapping(path = "/")
     @ResponseStatus(HttpStatus.OK)
-    public void health() {
+    public ResponseEntity<String> health() {
         NewRelic.ignoreTransaction();
+        return ResponseEntity.ok("Hello");
     }
 }
