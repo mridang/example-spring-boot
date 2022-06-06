@@ -25,6 +25,8 @@ management:
     enabled-by-default: true
 
 spring:
+  application:
+    name: "springy"
   security:
     user:
       name: admin
