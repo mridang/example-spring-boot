@@ -23,6 +23,7 @@ dependencies {
     api group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.7.0'
     api group: 'org.springframework.boot', name: 'spring-boot-starter-log4j2', version: '2.7.0'
     api group: 'org.springframework.boot', name: 'spring-boot-starter-graphql', version: '2.7.0'
+    api group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version: '2.7.0'
     testFixturesApi group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.7.0'
     api group: 'org.springframework.graphql', name: 'spring-graphql', version: '1.0.0-M6'
     testFixturesApi group: 'org.springframework.graphql', name: 'spring-graphql-test', version: '1.0.0-M6'
@@ -47,6 +48,7 @@ dependencies {
     implementation group: 'commons-codec', name: 'commons-codec', version: '1.15'
     implementation group: 'one.util', name: 'streamex', version: '0.8.1'
     api group: 'com.graphql-java', name: 'graphql-java-extended-scalars', version: '18.1'
+    api group: 'com.amazonaws', name: 'aws-xray-recorder-sdk-spring', version: '2.11.1'
 }
 
 test {

@@ -9,10 +9,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.core.env.Environment;
 
+import com.amazonaws.xray.spring.aop.XRayEnabled;
+
 import net.saliman.spring.request.correlation.api.EnableRequestCorrelation;
 
 @SpringBootApplication
 @EnableRequestCorrelation
+@XRayEnabled
 public class Application implements EnvironmentAware {
 
     private static final Logger logger = LogManager.getLogger(Application.class);
