@@ -17,6 +17,6 @@ public class IndexController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> health() {
         NewRelic.ignoreTransaction();
-        return ResponseEntity.ok("Hello");
+        return ResponseEntity.ok("x");
     }
 }
