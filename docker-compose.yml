@@ -9,6 +9,7 @@ services:
     environment:
       - LAUNCH_TYPE=local
       - AWS_PROFILE=default
+      - ENVIRONMENT_NAME=dev
     volumes:
       - ~/.aws:${HOME}/.aws
     entrypoint: ./init-and-run.sh local dev
