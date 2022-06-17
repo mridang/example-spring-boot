@@ -49,6 +49,8 @@ dependencies {
     implementation group: 'one.util', name: 'streamex', version: '0.8.1'
     api group: 'com.graphql-java', name: 'graphql-java-extended-scalars', version: '18.1'
     api group: 'com.amazonaws', name: 'aws-xray-recorder-sdk-spring', version: '2.11.1'
+    api group: 'io.micrometer', name: 'micrometer-registry-new-relic', version: '1.9.0'
+
 }
 
 test {

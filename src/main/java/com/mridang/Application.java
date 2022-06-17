@@ -28,6 +28,7 @@ public class Application implements EnvironmentAware, WebApplicationInitializer 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
+
     @Override
     public void setEnvironment(Environment environment) {
         System.getProperties().forEach((o, o2) -> logger.info("Found property '{}' with value '{}'", o, o2));

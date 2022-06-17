@@ -26,6 +26,6 @@ public class BasicSimulation extends Simulation {
                     .get(session -> "/?" + UUID.randomUUID().toString()));
 
     {
-        setUp(scn.injectClosed(constantConcurrentUsers(2000).during(60)).protocols(httpProtocol));
+        setUp(scn.injectClosed(constantConcurrentUsers(20).during(60)).protocols(httpProtocol));
     }
 }

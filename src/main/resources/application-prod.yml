@@ -5,10 +5,7 @@ management:
   metrics:
     export:
       newrelic:
-        enabled: false
-        api-key: 00000000000000000000000000000000
-        account-id: 154964
-        step: 10s
+        enabled: true
   endpoints:
     web:
       exposure:
@@ -21,4 +18,5 @@ logging:
   config: classpath:logging/prod_log4j2.xml
   level:
     root: ERROR
+
 ###############################################################################

@@ -18,6 +18,12 @@ logging:
     root: DEBUG
 
 management:
+  metrics:
+    export:
+      newrelic:
+        enabled: false
+        api-key: 3d2212b2af6dda2e5c9e10df237b1f33FFFFNRAL
+        account-id: 3519655
   endpoints:
     web:
       exposure:
