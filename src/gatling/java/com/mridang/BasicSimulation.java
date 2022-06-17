@@ -5,6 +5,7 @@ import static io.gatling.javaapi.core.CoreDsl.scenario;
 import static io.gatling.javaapi.http.HttpDsl.http;
 
 import java.util.Random;
+import java.util.UUID;
 
 import io.gatling.javaapi.core.ScenarioBuilder;
 import io.gatling.javaapi.core.Simulation;
@@ -16,15 +17,15 @@ public class BasicSimulation extends Simulation {
     private static final Random RANDOM = new Random();
 
     HttpProtocolBuilder httpProtocol = http
-            .baseUrl("https://mridang.dev.nos.to:9999")
+            .baseUrl("https://moomoo.staging.mrida.ng/")
             .disableCaching()
             .disableWarmUp();
 
     ScenarioBuilder scn = scenario("Scenario Name")
             .exec(http("request_1")
-                    .get(session -> "/?" + session.scenario()));
+                    .get(session -> "/?" + UUID.randomUUID().toString()));
 
     {
-        setUp(scn.injectClosed(constantConcurrentUsers(500).during(60)).protocols(httpProtocol));
+        setUp(scn.injectClosed(constantConcurrentUsers(2000).during(60)).protocols(httpProtocol));
     }
 }
