@@ -1,5 +1,5 @@
 # syntax = docker/dockerfile:1.2
-FROM 489478819445.dkr.ecr.us-east-1.amazonaws.com/amazoncorretto:17 AS builder
+FROM public.ecr.aws/amazoncorretto/amazoncorretto:17 AS builder
 
 MAINTAINER Mridang Agarwalla "mridang.agarwalla@gmail.com"
 
