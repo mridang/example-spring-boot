@@ -1,5 +1,6 @@
 package com.mridang;
 
+import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,8 @@ public class IndexController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> health() {
         NewRelic.ignoreTransaction();
-        return ResponseEntity.ok("......");
+        return ResponseEntity.ok()
+                .cacheControl(CacheControl.noCache())
+                .body("ok");
     }
 }
