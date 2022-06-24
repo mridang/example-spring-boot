@@ -60,3 +60,8 @@ test {
 springBoot {
     mainClass = 'com.mridang.Application'
 }
+
+checkForDuplicateClasses {
+    excludes(['com/amazonaws/xray/sdk.properties',
+              'org/aspectj/*'])
+}

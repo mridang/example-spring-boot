@@ -54,7 +54,9 @@ checkForDuplicateClasses {
               'org/intellij/lang/annotations/.*',
               'com/newrelic/relocated/*',
               'com/newrelic/telemetry/*',
-              'telemetry.sdk.version.properties'
+              'telemetry.sdk.version.properties',
+              'com/amazonaws/xray/sdk.properties',
+              'org/aspectj/*'
     ])
 }
 
