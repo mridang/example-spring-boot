@@ -25,8 +25,8 @@ dependencies {
     api group: 'org.springframework.boot', name: 'spring-boot-starter-graphql', version: '2.7.0'
     api group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version: '2.7.0'
     testFixturesApi group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.7.0'
-    api group: 'org.springframework.graphql', name: 'spring-graphql', version: '1.0.0-M6'
-    testFixturesApi group: 'org.springframework.graphql', name: 'spring-graphql-test', version: '1.0.0-M6'
+    api group: 'org.springframework.graphql', name: 'spring-graphql', version: '1.0.0'
+    testFixturesApi group: 'org.springframework.graphql', name: 'spring-graphql-test', version: '1.0.0'
     api group: 'org.springframework.data', name: 'spring-data-rest-hal-explorer', version: '3.7.0'
     api(group: 'net.saliman', name: 'spring-boot-starter-request-correlation', version: '2.0.0') {
         transitive = false

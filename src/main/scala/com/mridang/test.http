@@ -1,0 +1,19 @@
+POST https://springy.dev.nos.to:9999/probe/send
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "sfsff",
+  "time": 25252525255252
+}
+
+######
+
+
+POST https://springy.dev.nos.to:9999/graphql
+Accept: application/json
+Content-Type: application/json
+
+{
+  "query": "query { queryScala { name } }"
+}

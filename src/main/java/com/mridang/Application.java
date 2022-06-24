@@ -3,7 +3,6 @@ package com.mridang;
 import java.util.Arrays;
 
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -36,7 +35,7 @@ public class Application implements EnvironmentAware, WebApplicationInitializer 
     }
 
     @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
+    public void onStartup(ServletContext servletContext) {
         servletContext.setInitParameter("spring.profiles.active", System.getenv("ENVIRONMENT_NAME").toLowerCase());
     }
 }

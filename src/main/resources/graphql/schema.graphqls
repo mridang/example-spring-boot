@@ -1,0 +1,8 @@
+type ScalaResponse {
+    name: String!
+}
+
+type Query {
+    queryJava: String
+    queryScala: ScalaResponse
+}

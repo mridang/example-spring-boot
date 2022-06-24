@@ -1,5 +1,6 @@
 plugins {
     id 'myproject.java-conventions'
+    id 'myproject.scala-conventions'
     id 'myproject.spring-conventions'
     id 'application'
     id "io.gatling.gradle" version "3.7.6.3"
@@ -41,6 +42,7 @@ dependencies {
         exclude group: 'io.netty'
     }
     testImplementation group: 'org.testcontainers', name: 'junit-jupiter', version: '1.17.1'
+    implementation group: 'com.fasterxml.jackson.module', name: 'jackson-module-scala_2.13', version: '2.13.3'
 }
 
 checkForDuplicateClasses {
