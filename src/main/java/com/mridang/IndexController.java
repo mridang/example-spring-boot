@@ -20,6 +20,6 @@ public class IndexController {
         NewRelic.ignoreTransaction();
         return ResponseEntity.ok()
                 .cacheControl(CacheControl.noCache())
-                .body("ok");
+                .body("okies");
     }
 }
